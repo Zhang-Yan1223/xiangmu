@@ -11,12 +11,15 @@
         <el-table-column prop="photo" label="照片"></el-table-column>
         <el-table-column prop="categoryId" label="编号"></el-table-column>  
         <el-table-column prop="status" label="所属产品"></el-table-column>
-        <el-table-column label="操作">
-            <template v-slot="slot">
-                <a href="" @click.prevent="toDeleteHandle(slot.row.id)">删除</a>
-                <a href="" @click.prevent="toupdateHandler">修改</a>
-                <a href="" @click.prevent="toAddHandlar">详情</a>
-            </template>
+        <el-table-column style="display:inline" label="操作">
+            <el-row>
+      <el-button-group style="margin-bottom:20px">
+        <el-button size="small" type="primary" icon="el-icon-share" @click.prevent="toAddHandlar"></el-button>
+        <el-button size="small" type="primary" icon="el-icon-edit" @click.prevent="toupdateHandler"></el-button>
+        <el-button size="small" type="primary" icon="el-icon-delete" @click.prevent="toDeleteHandle"></el-button>
+      </el-button-group>
+
+    </el-row>
         </el-table-column>
     </el-table>
     <!-- 分页 -->

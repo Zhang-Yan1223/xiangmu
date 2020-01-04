@@ -17,8 +17,8 @@
             <template v-slot="slot">
               <!-- {{slot.row}} -->
               <!-- 双大阔号显示脚本 -->
-                <a href ="" @click.prevent="toDeleteHandler(slot.row.id)">删除</a>
-                <a href="" @click.prevent="toUpdateHandler(slot.row)">修改</a>
+                <el-button type="primary" size="small" icon="el-icon-delete" @click.prevent="toDeleteHandler(slot.row.id)"></el-button>
+          <el-button type="primary" size="small" icon="el-icon-edit" @click.prevent="toUpdateHandler(slot.row)"></el-button>
             </template>
    </el-table-column>
     </el-table>
