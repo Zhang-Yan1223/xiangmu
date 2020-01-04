@@ -11,7 +11,21 @@
       <el-table-column prop="name" label="栏目名称"></el-table-column>
       <el-table-column prop="num" label="序号"></el-table-column>
       <el-table-column prop="parentId" label="父栏目"></el-table-column>
-      <el-table-column prop="icon" label="图片"></el-table-column>
+      <el-table-column prop="icon" label="图片">
+        <template   slot-scope="scope">            
+          <img :src="scope.row.icon"  min-width="70" height="70" />
+        </template> 
+        <!-- <el-upload
+          action="https://jsonplaceholder.typicode.com/posts/"
+          list-type="picture-card"
+          :on-preview="handlePictureCardPreview"
+          :on-remove="handleRemove">
+          <i class="el-icon-plus"></i>
+        </el-upload>
+        <el-dialog :visible.sync="dialogVisible">
+          <img width="100%" :src="dialogImageUrl" alt="">
+        </el-dialog> -->
+      </el-table-column>
       <el-table-column label="操作">
         <template v-slot="slot">
           <el-button type="primary" size="small" icon="el-icon-delete" @click.prevent="toDeleteHandler(slot.row.id)"></el-button>
@@ -71,6 +85,13 @@ import querystring from 'querystring'
 export default {
     //存放调用方法
     methods:{
+        // AddPicture(){
+        //   return form.icon
+        // },
+        // handlePictureCardPreview(file) {
+        //   this.dialogImageUrl = file.url;
+        //   this.dialogVisible = true;
+        // },
         handleRemove(file, fileList) {
           console.log(file, fileList);
         },
@@ -150,7 +171,6 @@ export default {
     },
     //存放要向网页中存放的数据
     data(){
-        
         return{
             title:"录入栏目信息",
             visible:false,
@@ -158,7 +178,10 @@ export default {
             form:{
                 type:"category"
             },
-    fileList: [{}]};
+            fileList: [{}],
+            dialogImageUrl: '',
+            dialogVisible: false,
+      };
     },
     created(){
         //vue实例
