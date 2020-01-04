@@ -1,6 +1,6 @@
 <template>
 <!-- 订单管理 -->
-    <div>
+    <div style="padding:1em">
         <h1>
             订单管理
         </h1>
