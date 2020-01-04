@@ -27,7 +27,7 @@
     </el-pagination>
     <!-- 分页结束 -->
     <el-dialog
-        title="录入顾客信息"
+        title="录入产品信息"
         :visible.sync="visible"
         width="60%">
         {{form}}
