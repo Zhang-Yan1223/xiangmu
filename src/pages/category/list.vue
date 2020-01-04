@@ -1,5 +1,6 @@
 <template>
   <div>
+      <h1>栏目管理</h1>
     <!-- 按钮 -->
     <el-button type="primary" size="small" @click="toAddHandler">添加</el-button> 
     <el-button type="danger" size="small" @click="closeModalHandler">批量删除</el-button>
@@ -10,6 +11,7 @@
       <el-table-column prop="name" label="栏目名称"></el-table-column>
       <el-table-column prop="num" label="序号"></el-table-column>
       <el-table-column prop="parentId" label="父栏目"></el-table-column>
+      <el-table-column prop="icon" label="图片"></el-table-column>
       <el-table-column label="操作">
         <template v-slot="slot">
           <a href="" @click.prevent="toDeleteHandler(slot.row.id)">删除</a>
@@ -33,6 +35,12 @@
         </el-form-item>
         <el-form-item label="序号">
           <el-input v-model="form.num"></el-input>
+        </el-form-item>
+        <el-form-item label="父栏目">
+          <el-input v-model="form.parentId"></el-input>
+        </el-form-item>
+        <el-form-item label="图片">
+          <el-input v-model="form.icon"></el-input>
         </el-form-item>
         
       </el-form>
