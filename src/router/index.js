@@ -103,6 +103,42 @@ export const constantRoutes = [
       }
     ]
   },
+  {
+    path: '/address',
+    component: Layout,
+    children: [
+      {
+        path: 'list',
+        name: 'address_list',
+        component: () => import('@/pages/address/list'),
+        meta: { title: 'address', icon: 'user' }
+      }
+    ]
+  },
+  {
+    path: '/comment',
+    component: Layout,
+    children: [
+      {
+        path: 'list',
+        name: 'comment_list',
+        component: () => import('@/pages/comment/list'),
+        meta: { title: 'comment', icon: 'user' }
+      }
+    ]
+  },
+  {
+    path: '/order',
+    component: Layout,
+    children: [
+      {
+        path: 'list',
+        name: 'order_list',
+        component: () => import('@/pages/order/list'),
+        meta: { title: 'order', icon: 'user' }
+      }
+    ]
+  },
 
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
