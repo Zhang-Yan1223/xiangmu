@@ -42,7 +42,19 @@
         <el-form-item label="图片">
           <el-input v-model="form.icon"></el-input>
         </el-form-item>
-        
+        <el-upload
+          class="upload-demo"
+          action="https://jsonplaceholder.typicode.com/posts/"
+          :on-preview="handlePreview"
+          :on-remove="handleRemove"
+          :before-remove="beforeRemove"
+          multiple
+          :limit="3"
+          :on-exceed="handleExceed"
+          :file-list="fileList">
+          <el-table-button size="small" type="primary">点击上传</el-table-button>
+          <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+          </el-upload> 
       </el-form>
     <span slot="footer" class="dialog-footer">
     <el-button size="small" @click="closeModalHandler">取 消</el-button>
@@ -59,6 +71,18 @@ import querystring from 'querystring'
 export default {
     //存放调用方法
     methods:{
+        handleRemove(file, fileList) {
+          console.log(file, fileList);
+        },
+        handlePreview(file) {
+          console.log(file);
+        },
+        handleExceed(files, fileList) {
+          this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
+        },
+        beforeRemove(file, fileList) {
+          return this.$confirm(`确定移除 ${ file.name }？`);
+        },
         loadData(){
             let url="http://localhost:6677/category/findAll"
         request.get(url).then((response)=>{
@@ -133,8 +157,8 @@ export default {
             category:[],
             form:{
                 type:"category"
-            }
-        }
+            },
+    fileList: [{}]};
     },
     created(){
         //vue实例
