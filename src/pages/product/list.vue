@@ -1,5 +1,8 @@
 <template>
-    <div>
+    <div style="padding:1em">
+      <h1>
+            员工管理
+      </h1>
       <!-- 按钮 -->
         <el-button type=“success” size="small" @click="toAddHandler">添加</el-button>
         <el-button type="danger" size="small">批量删除</el-button>
@@ -8,8 +11,8 @@
         <el-table-column prop="id" label="编号"></el-table-column>
         <el-table-column prop="name" label="产品名称"></el-table-column>
         <el-table-column prop="price" label="价格"></el-table-column>
-        <el-table-column proper="description" label="描述"></el-table-column>
-        <el-table-column proper="categoryId" label="所属产品"></el-table-column>
+        <el-table-column prop="description" label="描述"></el-table-column>
+        <el-table-column prop="categoryId" label="所属产品"></el-table-column>
         <el-table-column fixed="right" label="操作">
             <template v-slot="slot">
               <!-- {{slot.row}} -->

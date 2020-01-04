@@ -6,7 +6,7 @@
     <el-button type="danger" size="small" @click="closeModalHandler">批量删除</el-button>
     <!-- /按钮 -->
     <!-- 表格 -->
-    <el-table :data="address">
+    <el-table :data="address.list">
       <el-table-column prop="id" label="编号"></el-table-column>
       <el-table-column prop="province" label="所在省"></el-table-column>
       <el-table-column prop="city" label="所在市"></el-table-column>
@@ -23,7 +23,11 @@
     </el-table>
     <!-- /表格结束 -->
     <!-- 分页开始 -->
-    <el-pagination layout="prev, pager, next" :total="50"></el-pagination>
+    <el-pagination 
+    layout="prev, pager, next" 
+    :total="address.total"
+    @current-change="pageChangeHandler"
+    ></el-pagination>
     <!-- /分页结束 -->
     <!-- 模态框 -->
     <el-dialog
@@ -64,12 +68,32 @@ import querystring from 'querystring'
 export default {
     //存放调用方法
     methods:{
+        pageChangeHandler(page){
+        // 将params中当前页改为插件中的当前页
+        this.params.page = page-1;
+        // 加载
+        this.loadData();
+    },
+    loadAddress(){
+      let url = "http://localhost:6677/address/findAll"
+      request.get(url).then((response)=>{
+        // 将查询结果设置到products中，this指向外部函数的this
+        this.options = response.data;
+      })
+    },
         loadData(){
-            let url="http://localhost:6677/address/findAll"
-        request.get(url).then((response)=>{
-            //将查询结果设置到category
-            this.address=response.data;
-        })
+            let url="http://localhost:6677/address/query"
+        request({
+          url,
+          method:"post",
+          headers:{
+              "Content-Type":"application/x-www-form-urlencoded"
+          },
+          data:querystring.stringify(this.params)
+      }).then((response)=>{
+        // 将查询结果设置到products中，this指向外部函数的this
+        this.address = response.data;
+      })
         },
         submitHandler(){
             //通过request与
@@ -135,10 +159,14 @@ export default {
         return{
             title:"录入地址信息",
             visible:false,
-            address:[],
+            address:{},
             form:{
                 type:"address"
-            }
+            },
+            params:{
+          page:0,
+          pageSize:10
+      }
         }
     },
     created(){
