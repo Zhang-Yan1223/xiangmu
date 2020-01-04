@@ -5,10 +5,10 @@
             顾客管理
         </h1>
       <!-- 按钮 -->
-        <el-button type=“primary” size="small" @click="toAddHandler">添加</el-button>
-        <el-button type="danger" size="small">批量删除</el-button>
+        <el-button type="primary" size="small" @click="toAddHandler">添加</el-button>
+        <el-button type="danger" size="small"  @click="closeModalHandler">批量删除</el-button>
         <!-- /按钮 -->
-    <el-table :data="customers.list">
+    <el-table :data="customer.list">
         <el-table-column prop="id" label="编号"></el-table-column>
         <el-table-column prop="username" label="用户名"></el-table-column>
         <el-table-column prop="realname" label="真实姓名"></el-table-column>
@@ -26,7 +26,7 @@
     <!--分页开始-->
     <el-pagination 
     layout="prev, pager, next" 
-    :total="customers.total"
+    :total="customer.total"
     @current-change="pageChangeHandler"
     ></el-pagination>
   <!-- /分页结束 -->
@@ -53,7 +53,8 @@
          </el-form>
   <!-- <span>这是一段信息</span> -->
   <span slot="footer" class="dialog-footer">
-    <el-button  @click="click = closeModalHand" size="small">取 消</el-button>
+    <el-button  @click="closeModalHandler
+    " size="small">取 消</el-button>
     <!--@表示事件绑定-->
     <el-button type="primary" @click="submitHandler" size="small">确 定</el-button>
   </span>
@@ -74,7 +75,7 @@ export default {
         // 加载
         this.loadData();
     },
-    loadAddress(){
+    loadCustomer(){
       let url = "http://localhost:6677/customer/findAll"
       request.get(url).then((response)=>{
         // 将查询结果设置到products中，this指向外部函数的this
@@ -93,7 +94,7 @@ export default {
           data:querystring.stringify(this.params)
       }).then((response)=>{
         // 将查询结果设置到products中，this指向外部函数的this
-        this.customers = response.data;
+        this.customer = response.data;
       })
       },
       submitHandler(){
@@ -113,7 +114,8 @@ export default {
           data:querystring.stringify(this.form)
         }).then((response)=>{
           //模态框关闭
-          this.closeModalHand();
+          this.closeModalHandler();
+          this.loadData();
           //提示消息
           this.$message({
             type:"success",
@@ -149,7 +151,7 @@ export default {
             this.title="添加顾客信息"
             this.visible=true;
         },
-        closeModalHand(){
+        closeModalHandler(){
             this.visible=false;
         },
         toUpdateHandler(row){
@@ -166,7 +168,7 @@ export default {
         return{
             title:"添加顾客信息",
             visible:false,
-            customers:{},
+            customer:{},
             form:{ type:"customer"},
             params:{
           page:0,
