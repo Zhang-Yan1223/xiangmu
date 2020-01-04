@@ -91,6 +91,18 @@ export const constantRoutes = [
       }
     ]
   },
+  {
+    path: '/product',
+    component: Layout,
+    children: [
+      {
+        path: 'list',
+        name: 'product_list',
+        component: () => import('@/pages/product/list'),
+        meta: { title: 'product', icon: 'user' }
+      }
+    ]
+  },
 
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
