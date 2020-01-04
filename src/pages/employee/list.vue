@@ -101,7 +101,7 @@ export default {
              this.title="修改员工信息"
              this.visible=true;
          },
-         todDeleteHandler(id){
+         toDeleteHandler(id){
              this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
