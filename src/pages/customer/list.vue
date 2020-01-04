@@ -1,6 +1,6 @@
 <template>
 <!-- 顾客管理 -->
-    <div>
+    <div style="padding:1em">
         <h1>
             顾客管理
         </h1>

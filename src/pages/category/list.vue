@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="padding:1em">
       <h1>栏目管理</h1>
     <!-- 按钮 -->
     <el-button type="primary" size="small" @click="toAddHandler">添加</el-button> 
