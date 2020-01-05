@@ -3,7 +3,7 @@
         <h1>评论管理</h1>
         <el-button type="primary" size="small" @click="toAddHandler">添加</el-button>
         <el-button type="danger" size="small">批量删除</el-button>
-    <el-table :data="comment">   
+    <el-table :data="comment.list">   
         <el-table-column fixed="left" prop="orderId" label="订单编号"></el-table-column>
         <el-table-column fixed="left" prop="content" label="内容"></el-table-column>
         <el-table-column fixed="left" prop="commentTime" label="评论时间"></el-table-column>
@@ -11,13 +11,13 @@
         <el-table-column label="操作">
         <template v-slot="slot">
                     <el-button type="primary" size="small" icon="el-icon-delete" @click.prevent="toDeleteHandler(slot.row.id)"></el-button>
-          <el-button type="primary" size="small" icon="el-icon-edit" @click.prevent="toUpdateHandler(slot.row)"></el-button>
+                    <el-button type="primary" size="small" icon="el-icon-edit" @click.prevent="toUpdateHandler(slot.row)"></el-button>
             </template>
             </el-table-column>
     </el-table>
 <!--分页-->
  <el-pagination
-    layout="prev, pager, next" :total="50">
+    layout="prev, pager, next" :total="comment.total" @current-change="pageChageHandler">
   </el-pagination>
 
    <el-dialog
@@ -44,6 +44,10 @@ import request from '@/utils/request'
 import querystring from 'querystring'
 export default {
      methods:{
+          pageChageHandler(page){
+            this.params.page=page-1;
+            this.loadData();
+        },
          submitHandel(){
              let url='http://localhost:6677/comment/saveOrUpdate'
             request({
@@ -66,12 +70,23 @@ export default {
             })
          },
          loadData(){
-             //this->vue实例 即data和method中的数据
-             let url="http://localhost:6677/comment/findAll"
-            request.get(url).then((response)=>{
-                //箭头函数中的this指向的是外部函数的this
-                this.comment=response.data;
-            })
+        let url = "http://localhost:6677/comment/query"
+        request({
+          url,
+          method:"POST",
+          headers:{
+              "Content-Type":"application/x-www-form-urlencoded"
+          },
+          data:querystring.stringify(this.params)
+        }).then((response)=>{
+            this.comment=response.data;
+        })
+            //  //this->vue实例 即data和method中的数据
+            //  let url="http://localhost:6677/comment/findAll"
+            // request.get(url).then((response)=>{
+            //     //箭头函数中的this指向的是外部函数的this
+            //     this.comment=response.data;
+            // })
          },
          toUpdateHandler(row){
              this.form=row;
@@ -109,9 +124,13 @@ export default {
         return{
             title:"上传评论信息",
              visible:false,
-            comment:[],
+            comment:{},
             form:{
                 type:"comment"
+            },
+            params:{
+                page:0,
+                pageSize:7
             }
     }},
     created(){
