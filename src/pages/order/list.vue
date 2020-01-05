@@ -49,8 +49,11 @@
             <template v-slot="slot">
               <!-- {{slot.row}} -->
               <!-- 双大阔号显示脚本 -->
-                <el-button type="primary" size="small" icon="el-icon-delete" @click.prevent="toDeleteHandler(slot.row.id)"></el-button>
-          <el-button type="primary" size="small" icon="el-icon-edit" @click.prevent="toUpdateHandler(slot.row)"></el-button>
+               <el-button-group>
+  <el-button type="primary" size="mini" @click.prevent="toUpdateHandler" icon="el-icon-edit"></el-button>
+  <el-button type="primary" size="mini" @click.prevent="toFindHandler" icon="el-icon-share"></el-button>
+  <el-button type="primary" size="mini" @click.prevent="toDeleteHandler" icon="el-icon-delete"></el-button>
+</el-button-group>
             </template>
    </el-table-column>
     </el-table>
@@ -168,6 +171,9 @@ export default {
                   this.form=row;
                    this.visible = true;
       
+        },
+        toFindHandler(){
+          this.visible=false;
         }
     },
     
