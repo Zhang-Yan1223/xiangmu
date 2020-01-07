@@ -12,7 +12,7 @@
         <el-table-column prop="id" label="编号"></el-table-column>
         <el-table-column prop="username" label="用户名"></el-table-column>
         <el-table-column prop="realname" label="真实姓名"></el-table-column>
-        <el-table-column proper="telephone" label="联系方式"></el-table-column>
+        <el-table-column prop="telephone" label="联系方式"></el-table-column>
         <el-table-column fixed="right" label="操作">
             <template v-slot="slot">
               <!-- {{slot.row}} -->
@@ -53,10 +53,9 @@
          </el-form>
   <!-- <span>这是一段信息</span> -->
   <span slot="footer" class="dialog-footer">
-    <el-button  @click="closeModalHandler
-    " size="small">取 消</el-button>
+    <el-button size="small" @click="closeModalHandler">取 消</el-button>
     <!--@表示事件绑定-->
-    <el-button type="primary" @click="submitHandler" size="small">确 定</el-button>
+    <el-button type="primary" size="small" @click="submitHandler">确 定</el-button>
   </span>
 </el-dialog>
 <!-- /模态框 -->

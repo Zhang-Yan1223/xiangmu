@@ -5,7 +5,7 @@
             订单管理
         </h1>
       <!-- 按钮 -->
-        <el-button type=“primary” size="small" @click="toAddHandler">添加</el-button>
+        <el-button type="primary" size="small" @click="toAddHandler">添加</el-button>
         <el-button type="danger" size="small">批量删除</el-button>
         <!-- /按钮 -->
     <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
@@ -43,8 +43,8 @@
         <el-table-column prop="id" label="订单编号"></el-table-column>
         <el-table-column prop="orderTime" label="下单时间"></el-table-column>
         <el-table-column prop="total" label="总价"></el-table-column>
-        <el-table-column proper="status" label="状态"></el-table-column>
-        <el-table-column proper="customerID" label="顾客id"></el-table-column>
+        <el-table-column prop="status" label="状态"></el-table-column>
+        <el-table-column prop="customerID" label="顾客id"></el-table-column>
         <el-table-column fixed="right" label="操作">
             <template v-slot="slot">
               <!-- {{slot.row}} -->

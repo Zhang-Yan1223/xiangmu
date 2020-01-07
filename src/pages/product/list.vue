@@ -1,10 +1,10 @@
 <template>
     <div style="padding:1em">
       <h1>
-            员工管理
+            产品管理
       </h1>
       <!-- 按钮 -->
-        <el-button type=“success” size="small" @click="toAddHandler">添加</el-button>
+        <el-button type="primary" size="small" @click="toAddHandler">添加</el-button>
         <el-button type="danger" size="small">批量删除</el-button>
         <!-- /按钮 -->
     <el-table :data="product">
@@ -17,8 +17,8 @@
             <template v-slot="slot">
               <!-- {{slot.row}} -->
               <!-- 双大阔号显示脚本 -->
-                <el-button type="primary" size="mini" @click.prevent="toDeleteHandler" icon="el-icon-delete"></el-button>
-                <el-button type="primary" size="mini" @click.prevent="toUpdateHandler" icon="el-icon-edit"></el-button>
+                <el-button type="primary" size="mini" @click.prevent="toDeleteHandler(slot.row.id)" icon="el-icon-delete"></el-button>
+                <el-button type="primary" size="mini" @click.prevent="toUpdateHandler(slot.row)" icon="el-icon-edit"></el-button>
             </template>
    </el-table-column>
     </el-table>
@@ -34,13 +34,14 @@
   :visible.sync="visible"
   width="60%"
  >
- --{{form}}
+ <!-- --{{form}} -->
  <el-form :model="form" label-width="80px">
    <el-form-item label="名称">
      <el-input v-model="form.name"></el-input>
    </el-form-item>
    <el-form-item label="价格">
-     <el-input type="price" v-model="form.price"></el-input>
+     <el-input v-model="form.price"></el-input>
+   </el-form-item>
      <!-- password定义，单词form拼写 -->
      <el-form-item label="所属栏目">
        <el-select v-model="form.categoryID">
@@ -53,7 +54,7 @@
        </el-select>
 
      </el-form-item>
-    </el-form-item>
+    <!-- </el-form-item> -->
          <el-form-item label="介绍">
            <el-input v-model="form.description"></el-input>
          </el-form-item>
